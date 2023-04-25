@@ -32,11 +32,11 @@ app.listen(port, function() {
  * - /routes/auth/auth
  * - /routes/quote/quote
  */
+const welcomeRoutes = require("./routes/welcome/welcome");
 const authRoutes = require("./routes/auth/auth");
-const quoteRoutes = require("./routes/quote/quote");
 
+app.use("/", welcomeRoutes);
 app.use("/auth", authRoutes);
-app.use("/quote", quoteRoutes);
 
 /**
  * Swagger Config
