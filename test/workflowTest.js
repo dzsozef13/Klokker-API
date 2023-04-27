@@ -5,7 +5,7 @@ const server = require('../server');
 
 chai.use(chaiHttp);
 
-// Test workflow
+// Test workflow 1
 describe('Workflow Test', () => {
     // Invalid input test
     it('Test setup', (done) => {
