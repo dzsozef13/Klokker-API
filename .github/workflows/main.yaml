@@ -31,10 +31,10 @@ jobs:
           npm install
           npm run 
           npm test
-        env: 
-          DBHOST: ${{ secrets.DBHOST }}
-          TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
-          JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
+        # env: 
+        #   DBHOST: ${{ secrets.DBHOST }}
+        #   TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
+        #   JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
 
 
   # Heavily modified deploy job to fit render.com
