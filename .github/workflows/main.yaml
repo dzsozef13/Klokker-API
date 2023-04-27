@@ -1,8 +1,8 @@
-name: Node.JS CI/CD
+name: Klokker - Production Workflow
 
 on:
   push:
-    branches: [development]
+    branches: [production]
 
 
 jobs:
@@ -17,19 +17,19 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3 # was "v2" before 
-        with: 
+        uses: actions/checkout@v3 
+        with:
           fetch-depth: 0
 
       - name: Use Node.JS ${{ matrix.node-version }}
-        uses: actions/setup-node@v3 # was "v2" before
+        uses: actions/setup-node@v3
         with: 
           node-version: ${{ matrix.node-version }}
 
       - name: NPM install, build and test
         run: |
           npm install
-          npm run 
+          npm run
           npm test
         env: 
           DBHOST: ${{ secrets.DBHOST }}
@@ -39,12 +39,12 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: [test] # Our tests must pass in order to run the deploy job
+    needs: [test]
     runs-on: ubuntu-latest
 
     steps: 
       - name: Deploy to production
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          service-id: ${{ secrets.SERVICE_ID }} # Can be found as part of the Deploy Hook
-          api-key: ${{ secrets.RENDER_API_KEY }} # Create your API key in Render Dashboard > Account Settings
+          service-id: ${{ secrets.SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
