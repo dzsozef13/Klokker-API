@@ -21,7 +21,7 @@ const { mapQuote, mapQuotes } = require('./util/quote+mapper');
 router.post("/", verifyToken, (req, res) => {
     data = req.body;
 
-    quote.insertMany( data )
+    quote.insertMany(data)
     .then(data => { 
         res.send(data) 
     })
