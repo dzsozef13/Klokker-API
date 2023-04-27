@@ -1,17 +1,8 @@
-/**
- * Quote Routes
- * 
- * - Get Single Quote
- * - Get All Quotes
- * - Create Quote
- * - Delete Quote
- */
-
 const router = require("express").Router();
-const quote = require('../../model/quoteSchema');
+const quote = require('../models/quoteSchema');
 
-const { verifyToken } = require('../util/route+verifyToken');
-const { mapQuote, mapQuotes } = require('./util/quote+mapper');
+const { verifyToken } = require('./verifyToken');
+const { mapQuote, mapQuotes } = require('../../util/quote+mapper');
 
 /**
  * Create Quote

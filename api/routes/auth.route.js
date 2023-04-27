@@ -1,16 +1,9 @@
-/**
- * Authorisation Routes
- * 
- * - User Registration
- * - User Validation
- */
-
 const router = require('express').Router();
-const user = require('../../model/userSchema');
+const user = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const { registerValidation, loginValidation } = require('./util/auth+validation');
+const { registerValidation, loginValidation } = require('../validation/auth.validation');
 
 /**
  * Register User

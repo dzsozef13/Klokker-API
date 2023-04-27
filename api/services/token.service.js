@@ -1,5 +1,9 @@
 const jwt = require("jsonwebtoken");
 
+const generateToken = (user) => {
+    return jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+}
+
 const verifyToken = (req, res, next) => {
     const token = req.header("auth-token");
 
@@ -14,4 +18,7 @@ const verifyToken = (req, res, next) => {
     }
 }
 
-module.exports = { verifyToken };
+module.exports = {
+    generateToken,
+    verifyToken
+ };
