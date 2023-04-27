@@ -4,8 +4,8 @@
   "description": "MEN RESTful API for Tennis related quotes.",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "test": "mocha",
+    "start-dev": "cross-env NODE_ENV=development nodemon server.js",
+    "test": "cross-env NODE_ENV=test mocha --exit",
     "swagger-autogen": "node swagger.js"
   },
   "author": "Jozsef Adam Punk",
