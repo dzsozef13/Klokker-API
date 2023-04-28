@@ -1,8 +1,8 @@
 {
-  "name": "tennis-notes-quotes-api",
+  "name": "klokker-api",
   "version": "1.0.0",
-  "description": "MEN RESTful API for Tennis related quotes.",
-  "main": "server.js",
+  "description": "MEN RESTful API for Klokker.",
+  "main": "app.js",
   "scripts": {
     "start-dev": "cross-env NODE_ENV=development nodemon server.js",
     "test": "cross-env NODE_ENV=test mocha --exit",
