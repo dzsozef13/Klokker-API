@@ -18,7 +18,6 @@ describe('User tests', () => {
             password: "12345678",
             role: "user"
         }
-        console.log("user test started");
         chai.request(app)
             .post('/user')
             .send(user)
@@ -26,7 +25,6 @@ describe('User tests', () => {
                 console.log(res);
                 expect(res.status).to.be.equal(201);
                 expect(res.body).to.be.a('object');
-                console.log("user created");
                
                 // Find
                 let userId = res.body._id
@@ -34,8 +32,7 @@ describe('User tests', () => {
                     .get('/user/' + userId)
                     .send()
                     .end((err, res) => {
-                        expect(res.status).to.be.equal(200);
-                        console.log("user found");                      
+                        expect(res.status).to.be.equal(200);              
                         done()
 
                         // Delete
@@ -44,7 +41,6 @@ describe('User tests', () => {
                             .send()
                             .end((err, res) => {
                                 expect(res.status).to.be.equal(204);
-                                console.log("user deleted");  
                                 done()                   
                             });
                     });

@@ -24,7 +24,6 @@ describe('Auth tests', () => {
                 console.log(res);
                 expect(res.status).to.be.equal(201);
                 expect(res.body).to.be.a('object');
-                console.log("user created");
                
                 // Find
                 let userId = res.body._id
@@ -37,8 +36,7 @@ describe('Auth tests', () => {
                     .send(loginBody)
                     .end((err, res) => {
                         expect(res.status).to.be.equal(200);
-                        expect(res.body.token).to.exist;
-                        console.log("user logged in");                      
+                        expect(res.body.token).to.exist;                
 
                         // Delete
                         chai.request(app)
@@ -46,7 +44,6 @@ describe('Auth tests', () => {
                             .send()
                             .end((err, res) => {
                                 expect(res.status).to.be.equal(204);
-                                console.log("user deleted");  
                                 done()                   
                             });
                     });
