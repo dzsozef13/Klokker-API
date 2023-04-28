@@ -2,14 +2,13 @@ const chai = require('chai');
 const expect = chai.expect;
 const chaiHttp = require('chai-http');
 const app = require('../app');
-const config = require('../api/config/config');
 const faker = require('faker');
 
 chai.use(chaiHttp);
 
-describe('User tests', () => {
+describe('Auth tests', () => {
 
-    it('Register + Find + Delete', (done) => {
+    it('Register + Login + Delete', (done) => {
 
         // Register
         let user = {
@@ -18,7 +17,6 @@ describe('User tests', () => {
             password: "12345678",
             role: "user"
         }
-        console.log("user test started");
         chai.request(app)
             .post('/user')
             .send(user)
@@ -30,13 +28,17 @@ describe('User tests', () => {
                
                 // Find
                 let userId = res.body._id
+                let loginBody =  {
+                    email: user.email,
+                    password: user.password
+                }
                 chai.request(app)
-                    .get('/user/' + userId)
-                    .send()
+                    .post('/auth/login')
+                    .send(loginBody)
                     .end((err, res) => {
                         expect(res.status).to.be.equal(200);
-                        console.log("user found");                      
-                        done()
+                        expect(res.body.token).to.exist;
+                        console.log("user logged in");                      
 
                         // Delete
                         chai.request(app)

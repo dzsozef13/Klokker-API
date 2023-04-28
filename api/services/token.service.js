@@ -1,7 +1,12 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
 
-const generateToken = (user) => {
-    return jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+const generateAuthToken = (user) => {
+    return jwt.sign({ _id: user._id }, config.tokenSecret);
+}
+
+const generateRefreshToken = (user) => {
+    return jwt.sign({ _id: user._id }, config.tokenSecret);
 }
 
 const verifyToken = (req, res, next) => {
@@ -10,7 +15,7 @@ const verifyToken = (req, res, next) => {
     if (!token) return res.status(401).json({ error: "Access Denied" });
 
     try {
-        const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+        const verified = jwt.verify(token, config.tokenSecret);
         req.user = verified;
         next();        
     } catch (error) {
@@ -19,6 +24,7 @@ const verifyToken = (req, res, next) => {
 }
 
 module.exports = {
-    generateToken,
+    generateAuthToken,
+    generateRefreshToken,
     verifyToken
  };

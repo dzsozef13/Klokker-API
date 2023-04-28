@@ -6,8 +6,11 @@ const dbOptions = {
     useNewUrlParser: true
 }
 
+const tokenSecret = process.env.TOKEN_SECRET;
+
 module.exports = { 
     port, 
     dbHost,
-    dbOptions
+    dbOptions,
+    tokenSecret
 };
