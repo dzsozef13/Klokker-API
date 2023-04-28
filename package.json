@@ -2,9 +2,9 @@
   "name": "klokker-api",
   "version": "1.0.0",
   "description": "MEN RESTful API for Klokker.",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start-dev": "cross-env NODE_ENV=development nodemon server.js",
+    "start": "cross-env NODE_ENV=development nodemon server.js",
     "test": "cross-env NODE_ENV=test mocha --exit",
     "swagger-autogen": "node swagger.js"
   },
@@ -18,6 +18,7 @@
     "cross-env": "^7.0.3",
     "dotenv-flow": "^3.2.0",
     "express": "^4.18.2",
+    "faker": "^5.1.0",
     "http-status": "^1.6.2",
     "joi": "^17.8.3",
     "jsonwebtoken": "^9.0.0",
@@ -29,6 +30,7 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "swagger-autogen": "^2.23.1"
   }
 }
