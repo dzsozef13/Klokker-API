@@ -10,9 +10,13 @@ const generateRefreshToken = (user) => {
 }
 
 const verifyToken = (req, res, next) => {
-    const token = req.header("auth-token");
+    const authHeader = req.header("Authorization");
 
-    if (!token) return res.status(401).json({ error: "Access Denied" });
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return res.status(401).json({ error: "Access Denied" });
+    }
+
+    const token = authHeader.substring(7);
 
     try {
         const verified = jwt.verify(token, config.tokenSecret);
