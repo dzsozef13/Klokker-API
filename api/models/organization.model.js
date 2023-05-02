@@ -12,12 +12,7 @@ let organizationSchema = new Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
             require: true
-        },
-        users: [{ type: String }],
-        userIds: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        }],
+        }
     }
 );
 

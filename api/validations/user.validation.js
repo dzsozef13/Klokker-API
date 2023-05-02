@@ -13,6 +13,7 @@ const getUsers = {
     query: Joi.object().keys({
         name: Joi.string(),
         role: Joi.string(),
+        organization: Joi.string(),
         sortBy: Joi.string(),
         limit: Joi.number().integer(),
         page: Joi.number().integer(),
@@ -42,7 +43,14 @@ const deleteUser = {
     params: Joi.object().keys({
         userId: Joi.string(),
     }),
-};  
+}; 
+
+const assignOrganization = {
+    params: Joi.object().keys({
+        userId: Joi.required(),
+        organizationId: Joi.required()
+    })
+}
 
 module.exports = {
     createUser,
@@ -50,5 +58,6 @@ module.exports = {
     getUser,
     updateUser,
     deleteUser,
+    assignOrganization
 };
   

@@ -26,11 +26,10 @@ let userSchema = new Schema(
 
         role: { type: String, require: true },
 
-        organization: { type: String, require: true },
-        organizationId: {
+        organization: { type: String },
+        _organizationId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Organization',
-            require: true,
+            ref: 'Organization'
         }
     }
 );
@@ -39,6 +38,11 @@ userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
     const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
     return !!user;
 };
+
+userSchema.statics.isMember = async function (userId, organizationId) {
+    const user = await this.findOne({ _id: userId, _organizationId: organizationId });
+    return !!user;
+}
 
 userSchema.methods.isPasswordMatch = async function (password) {
     const user = this;

@@ -29,6 +29,11 @@ const updateUser = catchAsync(async (req, res) => {
     res.send(user);
 });
 
+const assignOrganization = catchAsync(async (req, res) => {
+    const user = await userService.assignOrganization(req.params.userId, req.body);
+    res.send(user);
+});
+
 const deleteUser = catchAsync(async (req, res) => {
     await userService.deleteUserById(req.params.userId);
     res.status(httpStatus.NO_CONTENT).send();
@@ -39,5 +44,6 @@ module.exports = {
     getUsers,
     getUser,
     updateUser,
+    assignOrganization,
     deleteUser,
 };

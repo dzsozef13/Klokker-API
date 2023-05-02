@@ -12,11 +12,7 @@ let projectSchema = new Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Organization',
             require: true,
-        },
-        taskIds: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Task'
-        }],
+        }
     }
 );
 
