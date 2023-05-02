@@ -7,10 +7,10 @@ let projectSchema = new Schema(
         name: { type: String, require: true, max: 255 },
         description: { type: String },
 
-        organization: { type: String, require: true},
-        organizationId: {
+        team: { type: String, require: true},
+        _teamId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Organization',
+            ref: 'Team',
             require: true,
         }
     }

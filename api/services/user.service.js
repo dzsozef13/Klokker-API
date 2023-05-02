@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { User, Organization } = require('../models');
+const { User, Team } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 const createUser = async (userBody) => {
@@ -35,16 +35,16 @@ const updateUserById = async (userId, updateBody) => {
     return user;
 };
 
-const assignUserWithOrganization = async (userId, organizationId) => {
+const assignUserWithTeam = async (userId, teamId) => {
     const user = await getUserById(userId);
-    const organization = Organization.findOne(organizationId);
+    const team = Team.findOne(teamId);
     if (!user) {
         throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
     }
-    if (!organization) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Organization not found')
+    if (!team) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Team not found')
     }
-    if (await User.isMember(userId, organizationId)) {
+    if (await User.isMember(userId, teamId)) {
         throw new ApiError(httpStatus.BAD_REQUEST, 'User is already member');
     }
     Object.assign(user, updateBody);
@@ -67,6 +67,6 @@ module.exports = {
     getUserByEmail,
     queryUsers,
     updateUserById,
-    assignUserWithOrganization,
+    assignUserWithTeam,
     deleteUserById,
 };

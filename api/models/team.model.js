@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-let organizationSchema = new Schema(
+let teamSchema = new Schema(
     {
         name: { type: String, require: true, max: 255 },
         description: { type: String },
@@ -16,4 +16,4 @@ let organizationSchema = new Schema(
     }
 );
 
-module.exports = mongoose.model("Organization", organizationSchema);
+module.exports = mongoose.model("Team", teamSchema);

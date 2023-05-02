@@ -26,10 +26,10 @@ let userSchema = new Schema(
 
         role: { type: String, require: true },
 
-        organization: { type: String },
-        _organizationId: {
+        team: { type: String },
+        _teamId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Organization'
+            ref: 'Team'
         }
     }
 );
@@ -39,8 +39,8 @@ userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
     return !!user;
 };
 
-userSchema.statics.isMember = async function (userId, organizationId) {
-    const user = await this.findOne({ _id: userId, _organizationId: organizationId });
+userSchema.statics.isMember = async function (userId, teamId) {
+    const user = await this.findOne({ _id: userId, _teamId: teamId });
     return !!user;
 }
 
