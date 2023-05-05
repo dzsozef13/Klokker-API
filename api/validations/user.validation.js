@@ -5,7 +5,7 @@ const createUser = {
         email: Joi.string().required().email(),
         password: Joi.string().required(),
         name: Joi.string().required(),
-        role: Joi.string().required().valid('user', 'admin'),
+        role: Joi.string().required().valid('user', 'admin')
     }),
 };
   
@@ -16,7 +16,7 @@ const getUsers = {
         team: Joi.string(),
         sortBy: Joi.string(),
         limit: Joi.number().integer(),
-        page: Joi.number().integer(),
+        page: Joi.number().integer()
     }),
 };
 
@@ -34,21 +34,21 @@ const updateUser = {
         .keys({
         email: Joi.string().email(),
         password: Joi.string(),
-        name: Joi.string(),
+        name: Joi.string()
     })
     .min(1),
 };
 
 const assignTeam = {
-    params: Joi.object().keys({
+    body: Joi.object().keys({
         userId: Joi.required(),
-        _teamId: Joi.required()
+        teamId: Joi.required()
     })
 }
 
 const deleteUser = {
     params: Joi.object().keys({
-        userId: Joi.string(),
+        userId: Joi.string()
     }),
 };
 

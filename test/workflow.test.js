@@ -11,6 +11,6 @@ describe('Workflow Test', () => {
     it('Test setup', (done) => {
         let workflow = true;
         expect(workflow).to.be.equal(true);
-        done();   
+        done();
     });
 });

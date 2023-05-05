@@ -29,8 +29,8 @@ const updateUser = catchAsync(async (req, res) => {
     res.send(user);
 });
 
-const assignTeam = catchAsync(async (req, res) => {
-    const user = await userService.assignTeam(req.params.userId, req.body);
+const assignUserWithTeam = catchAsync(async (req, res) => {
+    const user = await userService.assignUserWithTeam(req.body.userId, req.body.teamId);
     res.send(user);
 });
 
@@ -44,6 +44,6 @@ module.exports = {
     getUsers,
     getUser,
     updateUser,
-    assignTeam,
+    assignUserWithTeam,
     deleteUser,
 };

@@ -47,7 +47,7 @@ const assignUserWithTeam = async (userId, teamId) => {
     if (await User.isMember(userId, teamId)) {
         throw new ApiError(httpStatus.BAD_REQUEST, 'User is already member');
     }
-    Object.assign(user, updateBody);
+    user._teamId = teamId;
     await user.save();
     return user;
 };

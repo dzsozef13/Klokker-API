@@ -6,15 +6,16 @@ const { verifyToken } = require('../services/token.service');
 
 const router = express.Router();
 
-router
-  .route('/')
-  .post(validate(userValidation.createUser), userController.createUser)
-  .get(verifyToken, validate(userValidation.getUsers), userController.getUsers);
+router.route('/')
+    .post(validate(userValidation.createUser), userController.createUser)
+    .get(verifyToken, validate(userValidation.getUsers), userController.getUsers);
 
-router
-  .route('/:userId')
-  .get(verifyToken, validate(userValidation.getUser), userController.getUser)
-  .patch(verifyToken, validate(userValidation.updateUser), userController.updateUser)
-  .delete(verifyToken, validate(userValidation.deleteUser), userController.deleteUser);
+router.route('/:userId')
+    .get(verifyToken, validate(userValidation.getUser), userController.getUser)
+    .patch(verifyToken, validate(userValidation.updateUser), userController.updateUser)
+    .delete(verifyToken, validate(userValidation.deleteUser), userController.deleteUser);
+
+router.route('/team')
+    .post(verifyToken, validate(userValidation.assignTeam), userController.assignUserWithTeam);
 
 module.exports = router;

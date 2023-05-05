@@ -7,8 +7,8 @@ const faker = require('faker');
 
 chai.use(chaiHttp);
 
-describe('User tests', () => {
-    it('Register + Find + Delete', (done) => {
+describe('Team tests', () => {
+    it('Create + Find + Assign', (done) => {
         
         // Register
         let user = {
