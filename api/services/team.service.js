@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
-const { User, Team } = require('../models');
-const ApiError = require('../utils/ApiError');
+const { User, Team } = require('../domain');
+const ApiError = require('../domain/errors/ApiError');
 
 const createTeam = async (teamBody) => {
     if (await Team.isNameTaken(teamBody.name)) {

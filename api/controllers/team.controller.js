@@ -1,8 +1,9 @@
 const httpStatus = require('http-status');
-const pick = require('../utils/pick');
-const ApiError = require('../utils/ApiError');
-const catchAsync = require('../utils/catchAsync');
-const { teamService } = require('../services');
+const pick = require('../middlewares/pick');
+const ApiError = require('../domain/errors/ApiError');
+const catchAsync = require('../middlewares/catchAsync');
+const { teamService, userService } = require('../services');
+const chop = require('../middlewares/chop');
 
 const createTeam = catchAsync(async (req, res) => {
     const team = await teamService.createTeam(req.body);
@@ -10,10 +11,13 @@ const createTeam = catchAsync(async (req, res) => {
 });
 
 const getTeam = catchAsync(async (req, res) => {
-    const team = await teamService.getTeamById(req.params.teamId);
+    var team = await teamService.getTeamById(req.params.teamId);
+    var owner = await userService.getUserById(team._ownerId);
     if (!team) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Team not found');
     }
+    team = chop(team, ['_ownerId']);
+    team.owner = chop(owner, ['_teamId', 'password']);
     res.send(team);
 });
 
