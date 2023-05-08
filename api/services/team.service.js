@@ -18,7 +18,7 @@ const queryTeams = async (filter, options) => {
     return teams;
 };
 
-const updateTeamById = async (teamId, updateBody) => {
+const updateTeamWithId = async (teamId, updateBody) => {
     const team = await getTeamById(teamId);
     if (!team) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Team not found');
@@ -31,7 +31,7 @@ const updateTeamById = async (teamId, updateBody) => {
     return team;
 };
 
-const deleteTeamById = async (teamId) => {
+const deleteTeamWithId = async (teamId) => {
     const team = await getTeamById(teamId);
     if (!team) {
         throw new ApiError(httpStatus.NOT_FOUND, 'Team not found');
@@ -44,6 +44,6 @@ module.exports = {
     createTeam,
     getTeamById,
     queryTeams,
-    updateTeamById,
-    deleteTeamById,
+    updateTeamWithId,
+    deleteTeamWithId,
 };

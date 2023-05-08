@@ -25,17 +25,17 @@ const getUser = catchAsync(async (req, res) => {
 });
 
 const updateUser = catchAsync(async (req, res) => {
-    const user = await userService.updateUserById(req.params.userId, req.body);
+    const user = await userService.updateUserWithId(req.params.userId, req.body);
     res.send(user);
 });
 
-const assignUserWithTeam = catchAsync(async (req, res) => {
-    const user = await userService.assignUserWithTeam(req.body.userId, req.body.teamId);
+const assignUserToTeam = catchAsync(async (req, res) => {
+    const user = await userService.assignUserToTeam(req.body.userId, req.body.teamId);
     res.send(user);
 });
 
 const deleteUser = catchAsync(async (req, res) => {
-    await userService.deleteUserById(req.params.userId);
+    await userService.deleteUserWithId(req.params.userId);
     res.status(httpStatus.NO_CONTENT).send();
 });
 
@@ -44,6 +44,6 @@ module.exports = {
     getUsers,
     getUser,
     updateUser,
-    assignUserWithTeam,
+    assignUserToTeam,
     deleteUser,
 };

@@ -26,7 +26,6 @@ let userSchema = new Schema(
 
         role: { type: String, require: true },
 
-        team: { type: String },
         _teamId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Team'

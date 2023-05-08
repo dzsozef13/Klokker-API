@@ -39,7 +39,7 @@ const updateUser = {
     .min(1),
 };
 
-const assignTeam = {
+const assignToTeam = {
     body: Joi.object().keys({
         userId: Joi.required(),
         teamId: Joi.required()
@@ -57,7 +57,7 @@ module.exports = {
     getUsers,
     getUser,
     updateUser,
-    assignTeam,
+    assignToTeam,
     deleteUser
 };
   

@@ -22,12 +22,10 @@ let taskSchema = new Schema(
             default: false
         },
 
-        assignees: [{ type: String }],
         assigneeIds: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }],
-        project: { type: String, require: true },
         projectId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Project',

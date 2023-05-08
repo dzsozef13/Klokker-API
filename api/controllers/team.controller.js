@@ -29,12 +29,12 @@ const getTeams = catchAsync(async (req, res) => {
 });
 
 const updateTeam = catchAsync(async (req, res) => {
-    const team = await teamService.updateTeamById(req.params.teamId, req.body);
+    const team = await teamService.updateTeamWithId(req.params.teamId, req.body);
     res.send(team);
 });
 
 const deleteTeam = catchAsync(async (req, res) => {
-    await teamService.deleteTeamById(req.params.userId);
+    await teamService.deleteTeamWithId(req.params.userId);
     res.status(httpStatus.NO_CONTENT).send();
 });
 

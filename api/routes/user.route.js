@@ -16,6 +16,6 @@ router.route('/:userId')
     .delete(verifyToken, validate(userValidation.deleteUser), userController.deleteUser);
 
 router.route('/team')
-    .post(verifyToken, validate(userValidation.assignTeam), userController.assignUserWithTeam);
+    .post(verifyToken, validate(userValidation.assignToTeam), userController.assignUserToTeam);
 
 module.exports = router;

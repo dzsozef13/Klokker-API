@@ -7,7 +7,6 @@ let teamSchema = new Schema(
         name: { type: String, require: true, max: 255 },
         description: { type: String },
 
-        owner: { type: Object },
         _ownerId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',

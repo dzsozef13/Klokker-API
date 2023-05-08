@@ -11,8 +11,8 @@ router.route('/')
     .get(verifyToken, validate(teamValidation.getTeams), teamController.getTeams);
 
 router.route('/:teamId')
-    .get(verifyToken, validate(teamValidation.getUser), teamController.getTeam)
-    .patch(verifyToken, validate(teamValidation.updateUser), teamController.updateTeam)
-    .delete(verifyToken, validate(teamValidation.deleteUser), teamController.deleteTeam);
+    .get(verifyToken, validate(teamValidation.getTeam), teamController.getTeam)
+    .patch(verifyToken, validate(teamValidation.updateTeam), teamController.updateTeam)
+    .delete(verifyToken, validate(teamValidation.deleteTeam), teamController.deleteTeam);
 
 module.exports = router;

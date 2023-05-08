@@ -22,7 +22,7 @@ const queryUsers = async (filter, options) => {
     return users;
 };
 
-const updateUserById = async (userId, updateBody) => {
+const updateUserWithId = async (userId, updateBody) => {
     const user = await getUserById(userId);
     if (!user) {
         throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
@@ -35,7 +35,7 @@ const updateUserById = async (userId, updateBody) => {
     return user;
 };
 
-const assignUserWithTeam = async (userId, teamId) => {
+const assignUserToTeam = async (userId, teamId) => {
     const user = await getUserById(userId);
     const team = Team.findOne(teamId);
     if (!user) {
@@ -52,7 +52,7 @@ const assignUserWithTeam = async (userId, teamId) => {
     return user;
 };
 
-const deleteUserById = async (userId) => {
+const deleteUserWithId = async (userId) => {
     const user = await getUserById(userId);
     if (!user) {
         throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
@@ -66,7 +66,7 @@ module.exports = {
     getUserById,
     getUserByEmail,
     queryUsers,
-    updateUserById,
-    assignUserWithTeam,
-    deleteUserById,
+    updateUserWithId,
+    assignUserToTeam,
+    deleteUserWithId,
 };
