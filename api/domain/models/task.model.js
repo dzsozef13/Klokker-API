@@ -22,16 +22,21 @@ let taskSchema = new Schema(
             default: false
         },
 
-        assigneeIds: [{
+        _assigneeId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
-        }],
-        projectId: {
+        },
+        _projectId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Project',
             require: true,
         }
     }
 );
+
+taskSchema.statics.isAssigned = async function (taskId, userId) {
+    const task = await this.findOne({ _id: taskId, _assigneeId: userId });
+    return !!task;
+}
 
 module.exports = mongoose.model("Task", taskSchema);

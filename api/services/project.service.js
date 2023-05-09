@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { Team, Project } = require('../domain');
+const { Team, Project } = require('../domain/models');
 const ApiError = require('../domain/errors/ApiError');
 
 const createProject = async (projectBody) => {

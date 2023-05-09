@@ -13,9 +13,6 @@ const createTeam = catchAsync(async (req, res) => {
 const getTeam = catchAsync(async (req, res) => {
     var team = await teamService.getTeamById(req.params.teamId);
     var owner = await userService.getUserById(team._ownerId);
-    if (!team) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Team not found');
-    }
     team = chop(team, ['_ownerId']);
     team.owner = chop(owner, ['_teamId', 'password']);
     res.send(team);
@@ -34,7 +31,7 @@ const updateTeam = catchAsync(async (req, res) => {
 });
 
 const deleteTeam = catchAsync(async (req, res) => {
-    await teamService.deleteTeamWithId(req.params.userId);
+    await teamService.deleteTeamWithId(req.params.teamId);
     res.status(httpStatus.NO_CONTENT).send();
 });
 

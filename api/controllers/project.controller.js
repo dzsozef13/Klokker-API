@@ -12,9 +12,6 @@ const createProject = catchAsync(async (req, res) => {
 
 const getProject = catchAsync(async (req, res) => {
     var project = await projectService.getProjectById(req.params.projectId);
-    if (!project) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Project not found');
-    }
     res.send(project);
 });
 
