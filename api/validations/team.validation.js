@@ -3,7 +3,7 @@ const Joi = require('joi');
 const createTeam = {
     body: Joi.object().keys({
         name: Joi.string().required(),
-        owner: Joi.string().required(),
+        description: Joi.string(),
         _ownerId: Joi.string().required(),
     }),
 };

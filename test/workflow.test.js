@@ -6,9 +6,9 @@ const app = require('../app');
 chai.use(chaiHttp);
 
 // Test workflow 1
-describe('Workflow Test', () => {
+describe('workflow test', () => {
     // Invalid input test
-    it('Test setup', (done) => {
+    it('should pass', (done) => {
         let workflow = true;
         expect(workflow).to.be.equal(true);
         done();

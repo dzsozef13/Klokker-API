@@ -7,57 +7,117 @@ const faker = require('faker');
 
 chai.use(chaiHttp);
 
-describe('User tests', () => {
-    it('Register + Find + Delete', (done) => {
-        
-        // Register
+describe('user tests', () => {
+
+    var token;
+    var userId;
+    var teamId;
+
+    it('should create & auth user for user testing', (done) => {
+
         let user = {
             name: faker.name.findName(),
             email: faker.internet.email().toLowerCase(),
             password: "12345678",
             role: "user"
         }
+
         chai.request(app)
-            .post('/user')
-            .send(user)
+        .post('/user')
+        .send(user)
+        .end((err, res) => {
+            chai.expect(res.status).to.be.equal(201);
+            chai.expect(res.body).to.be.a('object');
+
+            let loginBody =  {
+                email: user.email,
+                password: user.password
+            }
+
+            chai.request(app)
+            .post('/auth/login')
+            .send(loginBody)
             .end((err, res) => {
-                console.log(res);
-                expect(res.status).to.be.equal(201);
-                expect(res.body).to.be.a('object');
+                chai.expect(res.status).to.be.equal(200);
+                chai.expect(res.body.token).to.exist;
 
-                // Login
-                let loginBody =  {
-                    email: user.email,
-                    password: user.password
-                }
-                chai.request(app)
-                    .post('/auth/login')
-                    .send(loginBody)
-                    .end((err, res) => {
-                        expect(res.status).to.be.equal(200);
-                        expect(res.body.token).to.exist;                
+                userId = res.body.user._id;
+                token = res.body.token;
 
-                        // Find
-                        let userId = res.body.user._id
-                        let token = res.body.token
-                        chai.request(app)
-                            .get('/user/' + userId)
-                            .auth(token, { type: 'bearer' })
-                            .send()
-                            .end((err, res) => {
-                                expect(res.status).to.be.equal(200);
-
-                                // Delete
-                                chai.request(app)
-                                    .delete('/user/' + userId)
-                                    .auth(token, { type: 'bearer' })
-                                    .send()
-                                    .end((err, res) => {
-                                        expect(res.status).to.be.equal(204);
-                                        done()
-                                    });
-                            });
-                    });
+                done()
             });
+        });
     });
+
+    it('should create team for user testing', (done) => {
+
+        let team = {
+            name: faker.name.findName(),
+            _ownerId: userId
+        }
+
+        chai.request(app)
+        .post('/team')
+        .auth(token, { type: 'bearer' })
+        .send(team)
+        .end((err, res) => {
+            chai.expect(res.status).to.be.equal(201);
+            chai.expect(res.body).to.be.a('object');
+
+            teamId = res.body._id;
+
+            done()
+        });
+    });
+
+    it('should find user for user testing', (done) => {
+        chai.request(app)
+        .get('/user/' + userId)
+        .auth(token, { type: 'bearer' })
+        .send()
+        .end((err, res) => {
+            chai.expect(res.status).to.be.equal(200);
+            done()
+        });
+    });
+
+    it('should assign user with team for user testing', (done) => {
+
+        assignBody = {
+            userId: userId,
+            teamId: teamId
+        }
+
+        chai.request(app)
+        .post('/user/team')
+        .auth(token, { type: 'bearer' })
+        .send(assignBody)
+        .end((err, res) => {
+            chai.expect(res.status).to.be.equal(200);
+            done()
+        });
+    });
+
+    it('should delete team for user testing', (done) => {
+        chai.request(app)
+        .delete('/team/' + teamId)
+        .auth(token, { type: 'bearer' })
+        .send()
+        .end((err, res) => {
+            chai.expect(res.status).to.be.equal(204);
+            done()
+        });
+    });
+
+    it('should delete user for user testing', (done) => {
+        chai.request(app)
+        .delete('/user/' + userId)
+        .auth(token, { type: 'bearer' })
+        .send()
+        .end((err, res) => {
+            chai.expect(res.status).to.be.equal(204);
+            done()
+        });
+    });
+
 });

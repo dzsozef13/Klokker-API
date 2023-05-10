@@ -1,7 +1,6 @@
 const httpStatus = require('http-status');
 const { Task, User } = require('../domain/models');
 const ApiError = require('../domain/errors/ApiError');
-const { getTask } = require('../controllers/task.controller');
 
 const createTask = async (taskBody) => {
     return Task.create(taskBody);
