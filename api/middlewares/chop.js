@@ -6,7 +6,7 @@
  */
 function chop(obj, fields) {
     var newObject = obj.toJSON({ 
-        transform: (_, ret) => {
+        transform: (doc, ret) => {
             for (const field of fields) {
                 delete ret[field];
             }

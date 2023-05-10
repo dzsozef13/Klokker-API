@@ -3,8 +3,11 @@ const pick = require('../middlewares/pick');
 const ApiError = require('../domain/errors/ApiError');
 const catchAsync = require('../middlewares/catchAsync');
 const { userService } = require('../services');
+const hash = require('../middlewares/hash');
 
 const createUser = catchAsync(async (req, res) => {
+    var userBody = req.body;
+    userBody.password = await hash(userBody.password);
     const user = await userService.createUser(req.body);
     res.status(httpStatus.CREATED).send(user);
 });

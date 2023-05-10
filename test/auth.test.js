@@ -69,12 +69,7 @@ describe('Auth tests', () => {
             .post('/auth/login')
             .send(wrongLoginBody)
             .end((err, res) => {
-                chai.expect(res.status).to.be.equal(200);
-                chai.expect(res.body.token).to.exist;
-
-                userId = res.body.user._id;
-                token = res.body.token;
-
+                chai.expect(res.status).to.be.equal(401);
                 done()
             });
         });

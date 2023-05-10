@@ -17,11 +17,15 @@ let userSchema = new Schema(
             lowercase: true,
             max: 255 },
         password: { 
-            type: String, 
-            require: true, 
+            type: String,
+            required: true,
             trim: true,
-            min: 8, 
-            max: 255 
+            minlength: 8,
+            validate(value) {
+                if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+                    throw new Error('Password must contain at least one letter and one number');
+                }
+            }
         },
 
         role: { type: String, require: true },
@@ -41,7 +45,7 @@ userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
 userSchema.statics.isMember = async function (userId, teamId) {
     const user = await this.findOne({ _id: userId, _teamId: teamId });
     return !!user;
-}
+};
 
 userSchema.methods.isPasswordMatch = async function (password) {
     const user = this;
