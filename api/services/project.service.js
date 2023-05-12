@@ -3,9 +3,6 @@ const { Team, Project } = require('../domain/models');
 const ApiError = require('../domain/errors/ApiError');
 
 const createProject = async (projectBody) => {
-    if (await Project.isNameTaken(projectBody.name)) {
-        throw new ApiError(httpStatus.BAD_REQUEST, 'Name already taken');
-    }
     return Project.create(projectBody);
 };
 

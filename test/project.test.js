@@ -7,15 +7,14 @@ const faker = require('faker');
 
 chai.use(chaiHttp);
 
-describe('task tests', () => {
+describe('project tests', () => {
 
     var token;
     var userId;
     var teamId;
     var projectId;
-    var taskId;
 
-    it('should create & auth user for task testing', (done) => {
+    it('should create & auth user for project testing', (done) => {
 
         let user = {
             name: faker.name.findName(),
@@ -51,7 +50,7 @@ describe('task tests', () => {
         });
     });
 
-    it('should create team for task testing', (done) => {
+    it('should create team for project testing', (done) => {
 
         let team = {
             name: faker.name.findName(),
@@ -72,7 +71,7 @@ describe('task tests', () => {
         });
     });
 
-    it('should create project for task testing', (done) => {
+    it('should create project for project testing', (done) => {
 
         let project = {
             name: 'Test Project',
@@ -94,46 +93,7 @@ describe('task tests', () => {
         });
     });
 
-    it('should create task for task testing', (done) => {
-
-        let task = {
-            title: 'Test Task',
-            description: 'Test task description.',
-            _projectId: projectId
-        }
-
-        chai.request(app)
-        .post('/task')
-        .auth(token, { type: 'bearer' })
-        .send(task)
-        .end((err, res) => {
-            chai.expect(res.status).to.be.equal(201);
-            chai.expect(res.body).to.be.a('object');
-
-            taskId = res.body._id;
-
-            done()
-        });
-    });
-
-    it('should assign user to task for task tesing', (done) => {
-
-        assignBody = {
-            taskId: taskId,
-            userId: userId
-        }
-
-        chai.request(app)
-        .post('/task/assignee')
-        .auth(token, { type: 'bearer' })
-        .send(assignBody)
-        .end((err, res) => {
-            chai.expect(res.status).to.be.equal(200);
-            done()
-        });
-    });
-
-    it('should delete team for task testing', (done) => {
+    it('should delete team for project testing', (done) => {
         chai.request(app)
         .delete('/team/' + teamId)
         .auth(token, { type: 'bearer' })
@@ -144,7 +104,7 @@ describe('task tests', () => {
         });
     });
 
-    it('should delete project for task testing', (done) => {
+    it('should delete project for project testing', (done) => {
         chai.request(app)
         .delete('/project/' + projectId)
         .auth(token, { type: 'bearer' })
@@ -155,7 +115,7 @@ describe('task tests', () => {
         });
     });
 
-    it('should delete user for task testing', (done) => {
+    it('should delete user for project testing', (done) => {
         chai.request(app)
         .delete('/user/' + userId)
         .auth(token, { type: 'bearer' })

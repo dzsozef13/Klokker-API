@@ -4,7 +4,7 @@
   "description": "MEN RESTful API for Klokker.",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon server.js",
+    "serve": "cross-env NODE_ENV=development nodemon server.js",
     "test": "cross-env NODE_ENV=test mocha --exit",
     "swagger-autogen": "node swagger.js"
   },

@@ -1,12 +1,11 @@
 const httpStatus = require('http-status');
 const pick = require('../middlewares/pick');
-const ApiError = require('../domain/errors/ApiError');
 const catchAsync = require('../middlewares/catchAsync');
 const { projectService } = require('../services');
 const chop = require('../middlewares/chop');
 
 const createProject = catchAsync(async (req, res) => {
-    const project = await projectService.createTeam(req.body);
+    const project = await projectService.createProject(req.body);
     res.status(httpStatus.CREATED).send(project);
 });
 
@@ -33,7 +32,7 @@ const assignProjectToTeam = catchAsync(async (req, res) => {
 });
 
 const deleteProject = catchAsync(async (req, res) => {
-    await projectService.deleteProjectById(req.params.projectId);
+    await projectService.deleteProjectWithId(req.params.projectId);
     res.status(httpStatus.NO_CONTENT).send();
 });
 
@@ -43,5 +42,5 @@ module.exports = {
     getProjects,
     updateProject,
     assignProjectToTeam,
-    deleteProject,
+    deleteProject
 };
