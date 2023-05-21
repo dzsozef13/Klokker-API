@@ -28,6 +28,18 @@ app.use((req, res, next) => {
     next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    res.status(err.statusCode || 500);
+    res.setHeader('Content-Type', 'application/json');
+    res.json({
+        error: {
+            status: err.statusCode,
+            message: err.message
+        }
+    });
+});
+
 let server;
 mongoose.connect(config.dbHost, config.dbOptions).then(() => {
     console.log('Connected to MongoDB');

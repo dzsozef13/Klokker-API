@@ -15,9 +15,9 @@ const getProject = catchAsync(async (req, res) => {
 });
 
 const getProjects = catchAsync(async (req, res) => {
-    const filter = pick(req.query, ['name']);
+    const filter = pick(req.query, ['name', '_teamId']);
     const options = pick(req.query, ['sortBy', 'limit', 'page']);
-    const projects = await projectService.queryProjectss(filter, options);
+    const projects = await projectService.queryProjects(filter, options);
     res.send(projects);
 });
 

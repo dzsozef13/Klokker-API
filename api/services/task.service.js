@@ -11,7 +11,7 @@ const getTaskById = async (id) => {
 };
 
 const queryTasks = async (filter, options) => {
-    const tasks = await Task.find(filter, options);
+    const tasks = await Task.find(filter);
     return tasks;
 };
 

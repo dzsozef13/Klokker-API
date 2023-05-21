@@ -8,9 +8,7 @@ let projectSchema = new Schema(
         description: { type: String },
 
         _teamId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Team',
-            require: true,
+            type: String,
         }
     }
 );

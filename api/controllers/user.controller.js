@@ -31,7 +31,8 @@ const updateUser = catchAsync(async (req, res) => {
 
 const assignUserToTeam = catchAsync(async (req, res) => {
     const user = await userService.assignUserToTeam(req.body.userId, req.body.teamId);
-    res.send(user);
+    const assignedUser = await userService.updateUserWithId(user._id, {role: 'user'});
+    res.send(assignedUser);
 });
 
 const deleteUser = catchAsync(async (req, res) => {

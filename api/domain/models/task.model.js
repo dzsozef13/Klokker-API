@@ -16,20 +16,17 @@ let taskSchema = new Schema(
             require: true,
             default: true
         },
-        completed: { 
-            type: Boolean,
+        state: { 
+            type: String,
             require: true,
-            default: false
+            default: 'todo'
         },
 
         _assigneeId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            type: String,
         },
         _projectId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Project',
-            require: true,
+            type: String,
         }
     }
 );

@@ -66,6 +66,7 @@ describe('project tests', () => {
             chai.expect(res.body).to.be.a('object');
 
             teamId = res.body._id;
+            console.log(teamId);
 
             done()
         });
@@ -88,6 +89,26 @@ describe('project tests', () => {
             chai.expect(res.body).to.be.a('object');
 
             projectId = res.body._id;
+
+            done()
+        });
+    });
+
+    it('should find project by team for project testing', (done) => {
+
+        let projectQuery = {
+            team: teamId
+        }
+
+        chai.request(app)
+        .get('/project')
+        .auth(token, { type: 'bearer' })
+        .send(projectQuery)
+        .end((err, res) => {
+            chai.expect(res.status).to.be.equal(200);
+            chai.expect(res.body).to.be.a('array');
+
+            console.log(res.body);
 
             done()
         });

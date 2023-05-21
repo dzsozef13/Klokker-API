@@ -4,6 +4,8 @@ const createTask = {
     body: Joi.object().keys({
         title: Joi.string().required(),
         description: Joi.string().required(),
+        allocMinutes: Joi.number(),
+        dueDate: Joi.date(),
         _projectId: Joi.string().required(),
     }),
 };
@@ -11,6 +13,7 @@ const createTask = {
 const getTasks = {
     query: Joi.object().keys({
         title: Joi.string(),
+        _projectId: Joi.string(),
         sortBy: Joi.string(),
         limit: Joi.number().integer(),
         page: Joi.number().integer(),

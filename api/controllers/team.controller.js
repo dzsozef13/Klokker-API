@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const httpStatus = require('http-status');
 const pick = require('../middlewares/pick');
 const ApiError = require('../domain/errors/ApiError');
@@ -7,6 +8,8 @@ const chop = require('../middlewares/chop');
 
 const createTeam = catchAsync(async (req, res) => {
     const team = await teamService.createTeam(req.body);
+    const assignedUser = await userService.assignUserToTeam(req.body._ownerId, team._id)
+    const adminUser = await userService.updateUserWithId(assignedUser._id, {role: 'admin'})
     res.status(httpStatus.CREATED).send(team);
 });
 

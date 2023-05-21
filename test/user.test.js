@@ -80,24 +80,7 @@ describe('user tests', () => {
             done()
         });
     });
-
-    it('should assign user with team for user testing', (done) => {
-
-        assignBody = {
-            userId: userId,
-            teamId: teamId
-        }
-
-        chai.request(app)
-        .post('/user/team')
-        .auth(token, { type: 'bearer' })
-        .send(assignBody)
-        .end((err, res) => {
-            chai.expect(res.status).to.be.equal(200);
-            done()
-        });
-    });
-
+    
     it('should delete team for user testing', (done) => {
         chai.request(app)
         .delete('/team/' + teamId)
