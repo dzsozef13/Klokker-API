@@ -38,7 +38,7 @@ const updateTask = {
         usedMinutes: Joi.number(),
         dueDate: Joi.date(),
         billable: Joi.bool(),
-        completed: Joi.bool()
+        state: Joi.string()
     })
     .min(1),
 };

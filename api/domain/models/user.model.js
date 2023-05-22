@@ -32,7 +32,9 @@ let userSchema = new Schema(
 
         _teamId: {
             type: String,
-        }
+        },
+
+        invite: { type: String }
     }
 );
 

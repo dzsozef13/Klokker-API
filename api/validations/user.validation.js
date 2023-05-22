@@ -23,8 +23,15 @@ const getUsers = {
 const getUser = {
     params: Joi.object().keys({
         userId: Joi.string(),
+        
     }),
 };
+
+const getUserByEmail = {
+    params: Joi.object().keys({
+        email: Joi.string(),
+    }),
+}
 
 const updateUser = {
     params: Joi.object().keys({
@@ -46,6 +53,13 @@ const assignToTeam = {
     })
 }
 
+const inviteToTeam = {
+    body: Joi.object().keys({
+        email: Joi.required(),
+        teamId: Joi.required()
+    })
+}
+
 const deleteUser = {
     params: Joi.object().keys({
         userId: Joi.string()
@@ -56,8 +70,10 @@ module.exports = {
     createUser,
     getUsers,
     getUser,
+    getUserByEmail,
     updateUser,
     assignToTeam,
+    inviteToTeam,
     deleteUser
 };
   

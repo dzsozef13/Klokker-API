@@ -4,6 +4,7 @@ const ApiError = require('../domain/errors/ApiError');
 const catchAsync = require('../middlewares/catchAsync');
 const { userService } = require('../services');
 const hash = require('../middlewares/hash');
+const chop = require('../middlewares/chop');
 
 const createUser = catchAsync(async (req, res) => {
     var userBody = req.body;
@@ -20,7 +21,14 @@ const getUsers = catchAsync(async (req, res) => {
 });
 
 const getUser = catchAsync(async (req, res) => {
-    const user = await userService.getUserById(req.params.userId);
+    var user = await userService.getUserById(req.params.userId);
+    user = chop(user, ['password']);
+    res.send(user);
+});
+
+const getUserByEmail = catchAsync(async (req, res) => {
+    var user = await userService.getUserByEmail(req.params.email);
+    user = chop(user, ['password']);
     res.send(user);
 });
 
@@ -35,6 +43,13 @@ const assignUserToTeam = catchAsync(async (req, res) => {
     res.send(assignedUser);
 });
 
+const inviteUserToTeam = catchAsync(async (req, res) => {
+    const user = await userService.getUserByEmail(req.body.email);
+    console.log(user);
+    const invitedUser = await userService.updateUserWithId(user._id, {invite: req.body.teamId});
+    res.send(invitedUser);
+});
+
 const deleteUser = catchAsync(async (req, res) => {
     await userService.deleteUserWithId(req.params.userId);
     res.status(httpStatus.NO_CONTENT).send();
@@ -44,7 +59,9 @@ module.exports = {
     createUser,
     getUsers,
     getUser,
+    getUserByEmail,
     updateUser,
     assignUserToTeam,
+    inviteUserToTeam,
     deleteUser,
 };
