@@ -6,6 +6,10 @@ const httpStatus = require('http-status');
 const mongoose = require('mongoose');
 const config = require('./api/config/config');
 const cors = require("cors");
+const swaggerUi = require('swagger-ui-express');
+const yaml = require('yamljs');
+const swaggerDefinition = yaml.load('./swagger.yaml');
+
 
 const app = express();
 
@@ -22,6 +26,9 @@ app.use(bodyParser.json());
 
 // Routes
 app.use(routes);
+
+// Docs
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDefinition));
 
 // Unknown request
 app.use((req, res, next) => {
@@ -48,11 +55,5 @@ mongoose.connect(config.dbHost, config.dbOptions).then(() => {
     });
 mongoose.set('strictQuery', false);
 });
-
-// Swagger config
-const swaggerUi = require('swagger-ui-express');
-const yaml = require('yamljs');
-const swaggerDefinition = yaml.load('./swagger.yaml');
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDefinition));
 
 module.exports = app;
