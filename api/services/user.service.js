@@ -18,7 +18,7 @@ const getUserByEmail = async (email) => {
 };
 
 const queryUsers = async (filter, options) => {
-    const users = await User.find(filter, options);
+    const users = await User.find(filter);
     return users;
 };
 

@@ -11,7 +11,7 @@ const getProjectById = async (id) => {
 };
 
 const queryProjects = async (filter, options) => {
-    const projects = await Project.find({ _teamId: "6466c55ef1d6a39a7b842a74" });
+    const projects = await Project.find(filter);
     return projects;
 };
 

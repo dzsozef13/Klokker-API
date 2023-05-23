@@ -13,7 +13,7 @@ const getUsers = {
     query: Joi.object().keys({
         name: Joi.string(),
         role: Joi.string(),
-        team: Joi.string(),
+        _teamId: Joi.string(),
         sortBy: Joi.string(),
         limit: Joi.number().integer(),
         page: Joi.number().integer()
@@ -23,7 +23,6 @@ const getUsers = {
 const getUser = {
     params: Joi.object().keys({
         userId: Joi.string(),
-        
     }),
 };
 
@@ -41,7 +40,9 @@ const updateUser = {
         .keys({
         email: Joi.string().email(),
         password: Joi.string(),
-        name: Joi.string()
+        name: Joi.string(),
+        _teamId: Joi.optional(),
+        invite: Joi.optional()
     })
     .min(1),
 };
